@@ -93,12 +93,11 @@ def shortest_path(source, target):
     """
 
     start = Node(state=source,parent=None,action=None)
-    frontier = StackFrontier()
+    frontier = QueueFrontier()
     frontier.add(start)
 
     # Initialize empty explored set
     explored = set()
-    num_explored = 0
 
     while True:
         # If nothing left in frontier, no path
@@ -106,8 +105,7 @@ def shortest_path(source, target):
             raise Exception("No connection!")
         
         node = frontier.remove()
-        print(node)
-        num_explored += 1
+        # print(node)
 
         if node.state == target:
             actions = []
@@ -118,7 +116,7 @@ def shortest_path(source, target):
                 node = node.parent
             actions.reverse()
             contacts.reverse()
-            return [(*actions, *contacts)]
+            return list(zip(actions,contacts))
 
         
         explored.add(node.state)
