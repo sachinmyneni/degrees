@@ -50,7 +50,7 @@ def load_data(directory):
                 movies[row["movie_id"]]["stars"].add(row["person_id"])
             except KeyError:
                 pass
-
+    
 
 def main():
     if len(sys.argv) > 2:
@@ -92,8 +92,42 @@ def shortest_path(source, target):
     If no possible path, returns None.
     """
 
-    # TODO
-    raise NotImplementedError
+    start = Node(state=source,parent=None,action=None)
+    frontier = StackFrontier()
+    frontier.add(start)
+
+    # Initialize empty explored set
+    explored = set()
+    num_explored = 0
+
+    while True:
+        # If nothing left in frontier, no path
+        if frontier.empty():
+            raise Exception("No connection!")
+        
+        node = frontier.remove()
+        print(node)
+        num_explored += 1
+
+        if node.state == target:
+            actions = []
+            contacts = []
+            while node.parent is not None:
+                actions.append(node.action)
+                contacts.append(node.state)
+                node = node.parent
+            actions.reverse()
+            contacts.reverse()
+            return [(*actions, *contacts)]
+
+        
+        explored.add(node.state)
+
+        for movie,state in neighbors_for_person(node.state):
+            if not frontier.contains_state(state) and state not in explored:
+                child = Node(state=state,parent=node,action=movie)
+                frontier.add(child)
+
 
 
 def person_id_for_name(name):
