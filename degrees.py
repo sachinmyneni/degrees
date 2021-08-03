@@ -1,5 +1,6 @@
 import csv
 import sys
+import time
 
 from util import Node, StackFrontier, QueueFrontier
 
@@ -68,8 +69,10 @@ def main():
     target = person_id_for_name(input("Name: "))
     if target is None:
         sys.exit("Person not found.")
-
+    
+    start_time = time.process_time()
     path = shortest_path(source, target)
+    print(f"Execution Time: {time.process_time() - start_time}")
 
     if path is None:
         print("Not connected.")
@@ -93,7 +96,7 @@ def shortest_path(source, target):
     """
 
     start = Node(state=source,parent=None,action=None)
-    frontier = QueueFrontier()
+    frontier = StackFrontier()
     frontier.add(start)
 
     # Initialize empty explored set
