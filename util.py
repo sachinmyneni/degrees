@@ -1,13 +1,11 @@
 class Node():
     def __init__(self, state, parent, action):
         self.state = state
-        self.parent = parent  # parent person_id
-        self.action = action  # acted in
-        # self.cost   = cost  #path cost to get to this node from initial state.
+        self.parent = parent  
+        self.action = action  
     
     def __str__(self):
         return self.state
-
 
 class StackFrontier():
     def __init__(self):

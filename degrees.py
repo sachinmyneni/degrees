@@ -101,14 +101,15 @@ def shortest_path(source, target):
 
     # Initialize empty explored set
     explored = set()
+    num_explored = 0
 
     while True:
         # If nothing left in frontier, no path
         if frontier.empty():
-            raise Exception("No connection!")
+            raise Exception(f"No connection between {source} and {target}!")
         
         node = frontier.remove()
-        # print(node)
+        print(f"Evaluating: {node}")
 
         if node.state == target:
             actions = []
@@ -119,14 +120,17 @@ def shortest_path(source, target):
                 node = node.parent
             actions.reverse()
             contacts.reverse()
+            print(f"Number of explored states: {num_explored}")
             return list(zip(actions,contacts))
 
         
         explored.add(node.state)
+        num_explored += 1
 
         for movie,state in neighbors_for_person(node.state):
             if not frontier.contains_state(state) and state not in explored:
                 child = Node(state=state,parent=node,action=movie)
+                print(f"Adding {child} to frontier")
                 frontier.add(child)
 
 
