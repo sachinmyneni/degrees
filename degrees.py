@@ -72,13 +72,13 @@ def main():
     
     start_time = time.process_time()
     path = shortest_path(source, target)
-    print(f"Execution Time: {time.process_time() - start_time}")
+    # print(f"Execution Time: {time.process_time() - start_time}")
 
     if path is None:
         print("Not connected.")
     else:
         degrees = len(path)
-        print(f"{degrees} degrees of separation.")
+        # print(f"{degrees} degrees of separation.")
         path = [(None, source)] + path
         for i in range(degrees):
             person1 = people[path[i][1]]["name"]
@@ -96,7 +96,7 @@ def shortest_path(source, target):
     """
 
     start = Node(state=source,parent=None,action=None)
-    frontier = StackFrontier()
+    frontier = QueueFrontier()
     frontier.add(start)
 
     # Initialize empty explored set
@@ -120,7 +120,7 @@ def shortest_path(source, target):
                 node = node.parent
             actions.reverse()
             contacts.reverse()
-            print(f"Number of explored states: {num_explored}")
+            # print(f"Number of explored states: {num_explored}")
             return list(zip(actions,contacts))
 
         
@@ -139,9 +139,9 @@ def shortest_path(source, target):
                         child = child.parent
                     actions.reverse()
                     contacts.reverse()
-                    print(f"Number of explored states: {num_explored}")
+                    # print(f"Number of explored states: {num_explored}")
                     return list(zip(actions,contacts))                
-                print(f"Adding {child} to frontier")
+                # print(f"Adding {child} to frontier")
                 frontier.add(child)
 
 
