@@ -109,7 +109,7 @@ def shortest_path(source, target):
             raise Exception(f"No connection between {source} and {target} after {num_explored} explorations!")
         
         node = frontier.remove()
-        print(f"Evaluating: {node}")
+        # print(f"Evaluating: {node}")
 
         if node.state == target:
             actions = []
