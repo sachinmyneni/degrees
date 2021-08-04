@@ -130,6 +130,17 @@ def shortest_path(source, target):
         for movie,state in neighbors_for_person(node.state):
             if not frontier.contains_state(state) and state not in explored:
                 child = Node(state=state,parent=node,action=movie)
+                if child.state == target:
+                    actions = []
+                    contacts = []
+                    while child.parent is not None:
+                        actions.append(child.action)
+                        contacts.append(child.state)
+                        child = child.parent
+                    actions.reverse()
+                    contacts.reverse()
+                    print(f"Number of explored states: {num_explored}")
+                    return list(zip(actions,contacts))                
                 print(f"Adding {child} to frontier")
                 frontier.add(child)
 
