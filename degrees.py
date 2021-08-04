@@ -106,7 +106,7 @@ def shortest_path(source, target):
     while True:
         # If nothing left in frontier, no path
         if frontier.empty():
-            raise Exception(f"No connection between {source} and {target}!")
+            raise Exception(f"No connection between {source} and {target} after {num_explored} explorations!")
         
         node = frontier.remove()
         print(f"Evaluating: {node}")
